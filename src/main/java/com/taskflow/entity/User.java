@@ -15,6 +15,7 @@ import java.util.Objects;
 
 @Setter
 @Getter
+@ToString
 @Entity
 @Builder
 @NoArgsConstructor

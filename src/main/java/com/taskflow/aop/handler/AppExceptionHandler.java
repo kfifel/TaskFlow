@@ -68,6 +68,7 @@ public class AppExceptionHandler {
         ex.printStackTrace();
         return ResponseEntity.internalServerError().body(Response.builder()
                 .message("Internal server error")
+                        .result(ex.getMessage())
                 .build());
     }
 }
