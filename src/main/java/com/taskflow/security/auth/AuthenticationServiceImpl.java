@@ -2,7 +2,7 @@ package com.taskflow.security.auth;
 
 import com.taskflow.entity.Role;
 import com.taskflow.entity.User;
-import com.taskflow.entity.enums.Roles;
+import com.taskflow.entity.enums.RoleConstant;
 import com.taskflow.repository.UserRepository;
 import com.taskflow.security.AuthenticationService;
 import com.taskflow.security.jwt.JwtService;
@@ -34,9 +34,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public JwtAuthenticationResponse signup(SignUpRequest request) throws ValidationException {
         Role roleUser;
-        Optional<Role> byName = roleService.findByName(Roles.ROLE_USER.name());
+        Optional<Role> byName = roleService.findByName(RoleConstant.ROLE_USER.name());
         if(byName.isEmpty())
-            roleUser = roleService.save(Role.builder().name(Roles.ROLE_USER.name()).build());
+            roleUser = roleService.save(Role.builder().name(RoleConstant.ROLE_USER.name()).build());
         else
             roleUser = byName.get();
         User user = User.builder()

@@ -1,6 +1,6 @@
 package com.taskflow.entity.enums;
 
-public enum Roles {
+public enum RoleConstant {
     ROLE_USER,
     ROLE_ADMIN
 }

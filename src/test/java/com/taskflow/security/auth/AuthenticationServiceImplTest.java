@@ -2,7 +2,7 @@ package com.taskflow.security.auth;
 
 import com.taskflow.entity.Role;
 import com.taskflow.entity.User;
-import com.taskflow.entity.enums.Roles;
+import com.taskflow.entity.enums.RoleConstant;
 import com.taskflow.repository.UserRepository;
 import com.taskflow.security.jwt.JwtService;
 import com.taskflow.service.RoleService;
@@ -14,11 +14,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
@@ -58,9 +56,9 @@ class AuthenticationServiceImplTest {
                 .lastName("Doe")
                 .email("test@gmail.com")
                 .build();
-        Role roleUser = new Role(null, Roles.ROLE_USER.name());
+        Role roleUser = new Role(null, RoleConstant.ROLE_USER.name());
 
-        when(roleService.findByName(Roles.ROLE_USER.name())).thenReturn(Optional.of(roleUser));
+        when(roleService.findByName(RoleConstant.ROLE_USER.name())).thenReturn(Optional.of(roleUser));
         when(userService.save(any(User.class))).thenReturn(createMockUser());
         // Test the signup method
         JwtAuthenticationResponse response = authenticationServiceImplUnderTest.signup(signUpRequest);
@@ -87,7 +85,7 @@ class AuthenticationServiceImplTest {
                 .password("encodedPassword")
                 .firstName("John")
                 .lastName("Doe")
-                .roles(List.of(Role.builder().name(Roles.ROLE_USER.name()).build()))
+                .roles(List.of(Role.builder().name(RoleConstant.ROLE_USER.name()).build()))
                 .build();
     }
 

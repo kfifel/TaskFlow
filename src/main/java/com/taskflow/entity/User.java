@@ -15,7 +15,6 @@ import java.util.Objects;
 
 @Setter
 @Getter
-@ToString
 @Entity
 @Builder
 @NoArgsConstructor
@@ -29,10 +28,16 @@ public class User implements UserDetails {
     private String email;
     private String password;
     private LocalDateTime verifiedAt;
+    private Integer numberOfChangeTokens;
+    private boolean hasDeleteToken;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonManagedReference
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<Task> tasks;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
