@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.Entity;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +17,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Task implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1905122041950251207L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,6 +42,10 @@ public class Task implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private List<Tag> tags;
+
+    @ManyToOne
+    @JsonBackReference
+    private User createdBy;
 
     @ManyToOne
     @JsonBackReference
