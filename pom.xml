@@ -83,6 +83,15 @@
             <artifactId>jjwt-impl</artifactId>
             <version>0.11.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>io.projectreactor</groupId>
+            <artifactId>reactor-core</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

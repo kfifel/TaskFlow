@@ -21,4 +21,6 @@ public interface UserService {
     List<String> getAuthorities();
 
     UserDetailsService userDetailsService();
+
+    User findByUsername(String username);
 }

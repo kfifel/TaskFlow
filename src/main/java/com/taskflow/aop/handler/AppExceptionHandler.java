@@ -1,6 +1,8 @@
 package com.taskflow.aop.handler;
 
+import com.taskflow.exception.InsufficientTokensException;
 import com.taskflow.exception.ResourceNotFoundException;
+import com.taskflow.exception.UnauthorizedException;
 import com.taskflow.utils.CustomError;
 import com.taskflow.utils.Response;
 import com.taskflow.utils.ValidationException;
@@ -46,7 +48,6 @@ public class AppExceptionHandler {
         return response;
     }
 
-
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ValidationException.class)
     private Response<Object> handleValidationExceptions(ValidationException ex) {
@@ -61,7 +62,6 @@ public class AppExceptionHandler {
         return response;
     }
 
-
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     private ResponseEntity<Response<Object>> handleValidationExceptions(Exception ex) {
@@ -69,6 +69,14 @@ public class AppExceptionHandler {
         return ResponseEntity.internalServerError().body(Response.builder()
                 .message("Internal server error")
                         .result(ex.getMessage())
+                .build());
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler({UnauthorizedException.class, InsufficientTokensException.class})
+    public ResponseEntity<Response<Object>> handleUnauthorizedException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Response.builder()
+                .message(ex.getMessage())
                 .build());
     }
 }
