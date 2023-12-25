@@ -31,5 +31,4 @@ public class TaskDTO implements Serializable {
     String createdByLastName;
     String userFirstName;
     String userLastName;
-    LocalDateTime userCreatedAt;
 }

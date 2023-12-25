@@ -29,4 +29,5 @@ public class TaskChangeRequest {
     @OneToOne
     private Task task;
 
+    private Long oldOwnerId;
 }

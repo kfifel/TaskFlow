@@ -79,4 +79,12 @@ public class AppExceptionHandler {
                 .message(ex.getMessage())
                 .build());
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Response<Object>> handleIllegalArgumentException(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Response.builder()
+                .message(ex.getMessage())
+                .build());
+    }
 }
