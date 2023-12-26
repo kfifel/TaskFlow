@@ -7,7 +7,6 @@ import com.taskflow.web.dto.request.SignInRequest;
 import com.taskflow.web.dto.request.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +23,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping("/login")
-    public ResponseEntity<JwtAuthenticationResponse> login(@RequestBody @Valid SignInRequest credential) throws ValidationException {
+    public ResponseEntity<JwtAuthenticationResponse> login(@RequestBody @Valid SignInRequest credential) {
         JwtAuthenticationResponse result = authenticationService.signin(credential);
 
         return ResponseEntity.ok(result);
@@ -38,7 +37,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/token/refresh")
-    public ResponseEntity<JwtAuthenticationResponse> refreshToken(HttpServletRequest request, HttpServletResponse response) throws ValidationException {
+    public ResponseEntity<JwtAuthenticationResponse> refreshToken(HttpServletRequest request) throws ValidationException {
         String authorization = request.getHeader("Authorization");
         if(authorization == null || !authorization.startsWith("Bearer ")) {
             throw new UnauthorizedException("Refresh token is missing");
