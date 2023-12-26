@@ -27,7 +27,7 @@ public class TaskResource {
     private final ModelMapper modelMapper;
 
     @PostMapping("{id}/request-change")
-    @PreAuthorize("hasRole('ADMIN') or (hasRole('USER') and @SecurityUtils.getCurrentUserLogin() == @taskService.getTaskCreator(#id))")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or (hasRole('ROLE_USER') and @SecurityUtils.getCurrentUserLogin() == @taskService.getTaskCreator(#id))")
     public ResponseEntity<Object> requestChangeTask(@PathVariable("id") Long id) throws ResourceNotFoundException {
         taskService.requestChangeTask(id);
         return ResponseEntity.ok().build();

@@ -29,9 +29,9 @@ spring:
   main:
     lazy-initialization: true
 
-logging:
-  file:
-    name: myLogs.log
+#logging:
+  #file:
+    #name: myLogs.log
 #  level:
 #    root: info
 
@@ -39,5 +39,9 @@ token:
   signing:
     key: Q2lyNXNOTENrV1dNRGI2NDlJc1p5bTBxM2p1M2RZeTc1amtmbW1HRnZHST0=
   validity:
-    in:
-      days: 1
+    access:
+      in:
+        minutes: 20
+    refresh:
+      in:
+        month: 6

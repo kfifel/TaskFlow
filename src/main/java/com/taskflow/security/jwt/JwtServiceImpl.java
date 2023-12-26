@@ -25,8 +25,11 @@ public class JwtServiceImpl implements JwtService {
     @Value("${token.signing.key}")
     private String jwtSigningKey;
 
-    @Value("${token.validity.in.days}")
-    private long tokenValidityInDays;
+    @Value("${token.validity.refresh.in.month}")
+    private long refreshTokenValidityInMonth;
+
+    @Value("${token.validity.access.in.minutes}")
+    private long accessTokenValidityInMinutes;
 
     private static final String AUTHORITIES_KEY = "auth";
 
@@ -38,44 +41,56 @@ public class JwtServiceImpl implements JwtService {
     public Collection<? extends GrantedAuthority> extractAuthorities(String token) {
         Claims claims = extractAllClaims(token);
 
-        return Arrays
-                .stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+        return Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
                 .filter(auth -> !auth.trim().isEmpty())
-                .map(SimpleGrantedAuthority::new)
-                .toList();
+                .map(SimpleGrantedAuthority::new).toList();
     }
 
     @Override
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(UserDetails userDetails, TokenType tokenType) {
         String authorities = authoritiesToCsv(userDetails.getAuthorities());
         Map<String, Object> extraClaims = new HashMap<>();
         extraClaims.put(AUTHORITIES_KEY, authorities);
-        return generateToken(extraClaims, userDetails);
+        extraClaims.put("token_type", tokenType.name());
+        return generateToken(extraClaims, userDetails, tokenType);
     }
 
-    private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        return Jwts.builder().setClaims(extraClaims).setSubject(userDetails.getUsername())
+    private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails, TokenType tokenType) {
+        long tokenExpirationInMin = tokenType == TokenType.ACCESS_TOKEN ?
+                this.accessTokenValidityInMinutes :
+                this.refreshTokenValidityInMonth * 30 * 24 * 60;
+        return Jwts.builder()
+                .setClaims(extraClaims)
+                .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + this.tokenValidityInDays * 24 * 60 * 60 * 1000))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + tokenExpirationInMin * 60 * 1000))
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
+
     @Override
-    public boolean isTokenValid(String token, UserDetails userDetails) {
+    public boolean isTokenValid(String token, UserDetails userDetails, TokenType tokenType) {
         String username = extractUserName(token);
         Collection<? extends GrantedAuthority> authorities = extractAuthorities(token);
         return isTokenNotExpired(token) &&
-                username.equals(userDetails.getUsername())
-                && isGrantedAuthoritiesEqual(authorities, userDetails.getAuthorities());
+                checkTokenTypes(token, tokenType) &&
+                username.equals(userDetails.getUsername()) &&
+                isGrantedAuthoritiesEqual(authorities, userDetails.getAuthorities());
+    }
+
+    private boolean checkTokenTypes(String token, TokenType tokenType) {
+        String typeToken = extractClaim(token, claims -> claims.get("token_type", String.class));
+        return tokenType.name().equals(typeToken);
     }
 
     @Override
-    public boolean isTokenValid(String token) {
-        return isTokenNotExpired(token);
+    public boolean isTokenValid(String token, TokenType tokenType) {
+        return isTokenNotExpired(token) && checkTokenTypes(token, tokenType);
     }
 
     private boolean isTokenNotExpired(String token) {
         Date date = extractExpiration(token);
-        if(date == null) return false;
+        if (date == null) return false;
         return date.after(new Date());
     }
 

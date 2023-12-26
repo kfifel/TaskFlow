@@ -7,11 +7,11 @@ public interface JwtService {
 
     String extractUserName (String token);
 
-    String generateToken (UserDetails userDetails);
+    String generateToken (UserDetails userDetails, TokenType tokenType);
 
     Authentication getAuthentication(String jwt);
 
-    boolean isTokenValid (String token, UserDetails userDetails);
+    boolean isTokenValid (String token, UserDetails userDetails, TokenType tokenType);
 
-    boolean isTokenValid (String token);
+    boolean isTokenValid (String token, TokenType tokenType);
 }

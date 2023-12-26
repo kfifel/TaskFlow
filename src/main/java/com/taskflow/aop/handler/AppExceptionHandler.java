@@ -6,6 +6,7 @@ import com.taskflow.exception.UnauthorizedException;
 import com.taskflow.utils.CustomError;
 import com.taskflow.utils.Response;
 import com.taskflow.utils.ValidationException;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
