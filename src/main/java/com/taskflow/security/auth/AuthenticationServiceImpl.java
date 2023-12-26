@@ -3,11 +3,14 @@ package com.taskflow.security.auth;
 import com.taskflow.entity.Role;
 import com.taskflow.entity.User;
 import com.taskflow.entity.enums.RoleConstant;
+import com.taskflow.exception.UnauthorizedException;
 import com.taskflow.repository.UserRepository;
 import com.taskflow.security.AuthenticationService;
 import com.taskflow.security.jwt.JwtService;
+import com.taskflow.security.jwt.TokenType;
 import com.taskflow.service.RoleService;
 import com.taskflow.service.UserService;
+import com.taskflow.utils.CustomError;
 import com.taskflow.utils.ValidationException;
 import com.taskflow.web.dto.request.SignInRequest;
 import com.taskflow.web.dto.request.SignUpRequest;
@@ -47,8 +50,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .roles(List.of(roleUser))
         .build();
         userService.save(user);
-        String token = jwtService.generateToken(user);
-        return JwtAuthenticationResponse.builder().token(token).build();
+        String accessToken = jwtService.generateToken(user, TokenType.ACCESS_TOKEN);
+        String refreshToken = jwtService.generateToken(user, TokenType.REFRESH_TOKEN);
+        return JwtAuthenticationResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build();
     }
 
     @Override
@@ -58,9 +65,25 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         );
         var user = userRepository.findByEmail(request.getUsername())
                 .orElseThrow();
-        var token = jwtService.generateToken(user);
+        var accessToken = jwtService.generateToken(user, TokenType.ACCESS_TOKEN);
+        var refreshToken = jwtService.generateToken(user, TokenType.REFRESH_TOKEN);
         return  JwtAuthenticationResponse.builder()
-                .token(token)
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
                 .build();
+    }
+
+    @Override
+    public JwtAuthenticationResponse refreshToken(String  refreshToken) throws ValidationException {
+        if(jwtService.isTokenValid(refreshToken, TokenType.REFRESH_TOKEN)) {
+            String username = jwtService.extractUserName(refreshToken);
+            var user = userRepository.findByEmail(username).orElseThrow(() -> new ValidationException(new CustomError("email", "User not found")));
+            var accessToken = jwtService.generateToken(user, TokenType.ACCESS_TOKEN);
+            return JwtAuthenticationResponse.builder()
+                    .accessToken(accessToken)
+                    .refreshToken(refreshToken)
+                    .build();
+        }
+        throw new UnauthorizedException("Refresh token is invalid");
     }
 }

@@ -10,4 +10,6 @@ public interface AuthenticationService {
     JwtAuthenticationResponse signup(SignUpRequest request) throws ValidationException;
 
     JwtAuthenticationResponse signin(SignInRequest request);
+
+    JwtAuthenticationResponse refreshToken(String refreshToken) throws ValidationException;
 }
