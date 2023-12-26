@@ -35,7 +35,6 @@ public class SecurityConfiguration {
                     .authorizeHttpRequests()
                     .antMatchers("/api/v1/admin").hasAuthority(AuthoritiesConstants.ADMIN)
                     .antMatchers("/api/v1/auth/**").permitAll()
-                    .antMatchers("/api/v1/user/**").hasAuthority(AuthoritiesConstants.USER)
                     .anyRequest().authenticated()
                 .and()
                     .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
