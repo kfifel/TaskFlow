@@ -18,12 +18,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/role")
-public class RoleController {
+public class RoleResource {
 
     private final RoleService roleService;
 
     @Autowired
-    public RoleController(RoleService roleService) {
+    public RoleResource(RoleService roleService) {
         this.roleService = roleService;
     }
 

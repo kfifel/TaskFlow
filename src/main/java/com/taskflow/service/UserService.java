@@ -1,6 +1,7 @@
 package com.taskflow.service;
 
 import com.taskflow.entity.User;
+import com.taskflow.exception.ResourceNotFoundException;
 import com.taskflow.utils.ValidationException;
 import com.taskflow.web.dto.RoleDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,4 +24,6 @@ public interface UserService {
     UserDetailsService userDetailsService();
 
     User findByUsername(String username);
+
+    User findById(Long userId) throws ResourceNotFoundException;
 }

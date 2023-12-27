@@ -16,19 +16,32 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class TaskDTO implements Serializable {
-    Long id;
+
+    private Long id;
+
     @NotEmpty
-    String title;
+    private String title;
+
     @NotEmpty
-    String description;
+    private String description;
+
     @NotNull
-    LocalDateTime expDate;
-    boolean completed;
-    LocalDateTime assignedDate;
-    boolean hasChanged;
-    List<TagDto> tags;
-    String createdByFirstName;
-    String createdByLastName;
-    String userFirstName;
-    String userLastName;
+    private LocalDateTime deadline;
+
+    @NotNull
+    private LocalDateTime startDate;
+
+    private LocalDateTime assignedDate;
+
+
+    private boolean completed;
+
+    private boolean hasChanged;
+
+    @NotEmpty
+    private List<TagDto> tags;
+
+    private String createdBy;
+
+    private String assignedTo;
 }

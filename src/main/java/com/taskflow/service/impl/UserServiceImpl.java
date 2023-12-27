@@ -2,6 +2,7 @@ package com.taskflow.service.impl;
 
 import com.taskflow.entity.Role;
 import com.taskflow.entity.User;
+import com.taskflow.exception.ResourceNotFoundException;
 import com.taskflow.repository.UserRepository;
 import com.taskflow.service.RoleService;
 import com.taskflow.service.UserService;
@@ -111,5 +112,11 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String username) {
         return userRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
+    @Override
+    public User findById(Long userId) throws ResourceNotFoundException {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("userId", "User not found"));
     }
 }

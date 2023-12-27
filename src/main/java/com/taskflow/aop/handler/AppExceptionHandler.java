@@ -6,7 +6,6 @@ import com.taskflow.exception.UnauthorizedException;
 import com.taskflow.utils.CustomError;
 import com.taskflow.utils.Response;
 import com.taskflow.utils.ValidationException;
-import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -26,8 +25,8 @@ public class AppExceptionHandler {
         Response<Object> response = new Response<>();
         List<CustomError> errorList = new ArrayList<>();
         response.setMessage("Validation error");
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = error.getObjectName();
+        ex.getBindingResult().getFieldErrors().forEach(error -> {
+            String fieldName = error.getField();
             String errorMessage = error.getDefaultMessage();
             errorList.add(new CustomError(fieldName, errorMessage));
         });

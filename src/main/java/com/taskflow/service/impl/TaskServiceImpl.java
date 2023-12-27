@@ -1,8 +1,8 @@
 package com.taskflow.service.impl;
 
 import com.taskflow.entity.*;
-import com.taskflow.entity.enums.RoleConstant;
 import com.taskflow.entity.enums.StatusRequest;
+import com.taskflow.entity.enums.TaskStatus;
 import com.taskflow.entity.enums.TokenType;
 import com.taskflow.exception.InsufficientTokensException;
 import com.taskflow.exception.ResourceNotFoundException;
@@ -17,7 +17,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
-import reactor.core.publisher.Mono;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -36,11 +35,9 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional
     public void requestChangeTask(Long id) throws ResourceNotFoundException {
-        var principal = getUser();
+        var principal = getAuthenticatedUser();
         Task task = findById(id);
-        if(task.getUser() == null) throw new IllegalArgumentException("This task is not assigned to anyone");
-        if (task.isHasChanged()) throw new IllegalArgumentException("This task has already been changed");
-        if (principal.getNumberOfChangeTokens() <= 0) throw new InsufficientTokensException("You don't have enough change tokens");
+        canTaskBeChanged(task, principal);
 
         principal.setNumberOfChangeTokens(principal.getNumberOfChangeTokens() - 1);
         task.setHasChanged(true);
@@ -53,11 +50,6 @@ public class TaskServiceImpl implements TaskService {
                         .oldOwnerId(task.getUser().getId())
                 .build());
         taskRepository.save(task);
-    }
-
-    private User getUser() {
-        String username = SecurityUtils.getCurrentUserLogin();
-        return userService.findByUsername(username);
     }
 
     public Task findById(Long id) throws ResourceNotFoundException {
@@ -80,11 +72,14 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task save(Task task) throws ResourceNotFoundException {
-        var principal = getUser();
-        taskCannotCreateInThePast(task);
+        User principal = getAuthenticatedUser();
+        canTakeBeCreated(task);
         validateTags(task);
-        restrictTaskScheduling(task);
+
+        task.setStatus(TaskStatus.TODO);
         task.setCreatedBy(principal);
+        if (task.getUser() != null)
+            task.setAssignedDate(LocalDateTime.now());
         return taskRepository.save(task);
     }
 
@@ -97,11 +92,24 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public void assignTask(Long taskId, Long userId) throws ResourceNotFoundException {
         Task task = findById(taskId);
+        User user = userService.findById(userId);
+        task.setUser(user);
         canTaskBeAssigned(task);
+        task.setAssignedDate(LocalDateTime.now());
+        taskRepository.save(task);
+    }
+
+    @Override
+    public void changeStatus(Long taskId, TaskStatus status) throws ResourceNotFoundException {
+        Task task = this.findById(taskId);
+        if(status == TaskStatus.DONE && task.getDeadline().isBefore(LocalDateTime.now()))
+            throw new IllegalArgumentException("Task deadline is passed");
+        task.setStatus(status);
+        taskRepository.save(task);
     }
 
     private void canTaskBeAssigned(Task task) {
-        if (task.getExpDate() == null)
+        if (task.getDeadline() == null)
             throw new IllegalArgumentException("Task must have an expiration date");
 
         if (task.getUser() != null) {
@@ -109,9 +117,12 @@ public class TaskServiceImpl implements TaskService {
         }
     }
 
-    private void taskCannotCreateInThePast(Task task) {
-        if (task.getAssignedDate() != null && task.getAssignedDate().isBefore(LocalDateTime.now())) {
-            throw new IllegalArgumentException("The date is in the past !");
+    private void canTakeBeCreated(Task task) {
+        if (task.getStartDate() != null) {
+            if (task.getDeadline().toLocalDate().isAfter(LocalDate.now().plusDays(3)))
+                throw new IllegalArgumentException("Task scheduling is restricted to 3 days in advance.");
+            if (task.getStartDate().isBefore(LocalDateTime.now()))
+                throw new IllegalArgumentException("The date is in the past !");
         }
     }
 
@@ -123,13 +134,19 @@ public class TaskServiceImpl implements TaskService {
         task.setTags(tags);
     }
 
-    private void restrictTaskScheduling(Task task) {
-        LocalDate currentDate = LocalDate.now();
-        LocalDate taskExpDate = task.getExpDate().toLocalDate();
-        LocalDate maxAllowedExpDate = currentDate.plusDays(3);
+    private void canTaskBeChanged(Task task, User principal) {
+        if(task.getUser() == null)
+            throw new IllegalArgumentException("This task is not assigned to anyone");
+        if (task.isHasChanged())
+            throw new IllegalArgumentException("This task has already been changed");
+        if (principal.getNumberOfChangeTokens() <= 0)
+            throw new InsufficientTokensException("You don't have enough change tokens");
+    }
 
-        if (taskExpDate.isAfter(maxAllowedExpDate)) {
-            throw new IllegalArgumentException("Task scheduling is restricted to 3 days in advance.");
-        }
+    private User getAuthenticatedUser() {
+        String username = SecurityUtils.getCurrentUserLogin();
+        if (username == null)
+            throw new UnauthorizedException("User Not Found In the Context");
+        return userService.findByUsername(username);
     }
 }

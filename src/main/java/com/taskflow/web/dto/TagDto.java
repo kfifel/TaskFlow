@@ -1,9 +1,6 @@
 package com.taskflow.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Value;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -13,6 +10,7 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TagDto implements Serializable {
     Long id;
     String name;
