@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="687ce442-003a-45f3-bcc2-a98723d4e2cc" name="Changes" comment="add detached functionality">
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/taskflow/security/auth/AuthenticationServiceImplTest.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Interface" />
+        <option value="com.haulmont.jpb.NewClass" />
+        <option value="Enum" />
+        <option value="Class" />
+        <option value="com.haulmont.jpb.JpaRepository" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2ZrDMnNk0tDjT0oEnul4F7ijbKc" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "1.0.0-SNAPSHOT",
+    "last_opened_file_path": "E:/env/java/youcode/TaskFlow",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reactor",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
+  }
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.taskflow.exception" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\env\java\youcode\TaskFlow" />
+      <recent name="E:\env\java\youcode\TaskFlow\src\main\docker" />
+      <recent name="E:\env\java\youcode\TaskFlow\src\main\java\com\taskflow\entity\enums" />
+      <recent name="E:\env\java\youcode\TaskFlow\src\main\java\com\taskflow" />
+      <recent name="E:\env\java\youcode\TaskFlow\src\main\java\com\task\flow\taskflow" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\env\java\youcode\TaskFlow\src\main\java\com\taskflow\entity" />
+      <recent name="E:\env\java\youcode\TaskFlow\main-files" />
+      <recent name="E:\env\java\youcode\TaskFlow" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.taskflow.repository" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.taskflow.security.auth" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.taskflow.web.dto.request" />
+      <recent name="com.taskflow.web.mapper" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.TaskServiceImplTest">
+    <configuration name="AuthenticationServiceImplTest.test_signe_up_if_email_already_exists" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TaskFlow" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.taskflow.security.auth.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.taskflow.security.auth" />
+      <option name="MAIN_CLASS_NAME" value="com.taskflow.security.auth.AuthenticationServiceImplTest" />
+      <option name="METHOD_NAME" value="test_signe_up_if_email_already_exists" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskServiceImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TaskFlow" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.taskflow.security.auth.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.taskflow.security.auth" />
+      <option name="MAIN_CLASS_NAME" value="com.taskflow.security.auth.TaskServiceImplTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TaskFlowApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="TaskFlow" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.taskflow.TaskFlowApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker/sonar.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="src/main/docker/sonar.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Docker.docker/sonar.yml: Compose Deployment" />
+      <item itemvalue="JUnit.TaskServiceImplTest" />
+      <item itemvalue="JUnit.AuthenticationServiceImplTest.test_signe_up_if_email_already_exists" />
+      <item itemvalue="Spring Boot.TaskFlowApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TaskServiceImplTest" />
+        <item itemvalue="JUnit.AuthenticationServiceImplTest.test_signe_up_if_email_already_exists" />
+        <item itemvalue="Docker.docker/sonar.yml: Compose Deployment" />
+        <item itemvalue="JUnit.AuthenticationServiceImplTest.test_signe_up_if_email_already_exists" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="687ce442-003a-45f3-bcc2-a98723d4e2cc" name="Changes" comment="" />
+      <created>1703171260559</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1703171260559</updated>
+      <workItem from="1703171261989" duration="18173000" />
+      <workItem from="1703336423244" duration="810000" />
+      <workItem from="1703338635577" duration="55742000" />
+      <workItem from="1703628142643" duration="4338000" />
+      <workItem from="1703673421491" duration="8765000" />
+      <workItem from="1703717843878" duration="13207000" />
+    </task>
+    <task id="LOCAL-00001" summary="implementing the jwt security">
+      <option name="closed" value="true" />
+      <created>1703196061091</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1703196061091</updated>
+    </task>
+    <task id="LOCAL-00002" summary="test my security (done)">
+      <option name="closed" value="true" />
+      <created>1703231875211</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1703231875211</updated>
+    </task>
+    <task id="LOCAL-00003" summary="add testing JUnit">
+      <option name="closed" value="true" />
+      <created>1703244574104</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1703244574104</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add jar">
+      <option name="closed" value="true" />
+      <created>1703334300918</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1703334300918</updated>
+    </task>
+    <task id="LOCAL-00005" summary="add entities">
+      <option name="closed" value="true" />
+      <created>1703367409060</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1703367409060</updated>
+    </task>
+    <task id="LOCAL-00006" summary="create requestChangeTask and delete task logics, with adding new exceptions like InsufficientTokensException and UnauthorizedException">
+      <option name="closed" value="true" />
+      <created>1703418061632</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1703418061632</updated>
+    </task>
+    <task id="LOCAL-00007" summary="add security utils">
+      <option name="closed" value="true" />
+      <created>1703438240888</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1703438240888</updated>
+    </task>
+    <task id="LOCAL-00008" summary="add save task and update tasks">
+      <option name="closed" value="true" />
+      <created>1703438450397</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1703438450397</updated>
+    </task>
+    <task id="LOCAL-00009" summary="add a row to database taskChangeRequestRepository when request a change task">
+      <option name="closed" value="true" />
+      <created>1703492991961</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1703492991961</updated>
+    </task>
+    <task id="LOCAL-00010" summary="add type of token to payload of jwt">
+      <option name="closed" value="true" />
+      <created>1703582011865</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1703582011865</updated>
+    </task>
+    <task id="LOCAL-00011" summary="add refresh token">
+      <option name="closed" value="true" />
+      <created>1703582158998</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1703582158998</updated>
+    </task>
+    <task id="LOCAL-00012" summary="add JwtExceptionsHandler">
+      <option name="closed" value="true" />
+      <created>1703596255790</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1703596255791</updated>
+    </task>
+    <task id="LOCAL-00013" summary="add mysql and sonar images docker">
+      <option name="closed" value="true" />
+      <created>1703597028604</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1703597028604</updated>
+    </task>
+    <task id="LOCAL-00014" summary="add sonar plugin and properties">
+      <option name="closed" value="true" />
+      <created>1703605234294</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1703605234294</updated>
+    </task>
+    <task id="LOCAL-00015" summary="add request change and assign task features">
+      <option name="closed" value="true" />
+      <created>1703693175639</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1703693175639</updated>
+    </task>
+    <task id="LOCAL-00016" summary="ADD EVENTS SQL, AND Column to table user to double the change token in case of logics">
+      <option name="closed" value="true" />
+      <created>1703749087682</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1703749087683</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix sonarLint errors in  Constants and change name of class to AppConstants">
+      <option name="closed" value="true" />
+      <created>1703749274690</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1703749274690</updated>
+    </task>
+    <task id="LOCAL-00018" summary="add detached functionality">
+      <option name="closed" value="true" />
+      <created>1703758711738</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1703758711738</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="implementing the jwt security" />
+    <MESSAGE value="test my security (done)" />
+    <MESSAGE value="add testing JUnit" />
+    <MESSAGE value="add jar" />
+    <MESSAGE value="add entities" />
+    <MESSAGE value="create requestChangeTask and delete task logics, with adding new exceptions like InsufficientTokensException and UnauthorizedException" />
+    <MESSAGE value="add security utils" />
+    <MESSAGE value="add save task and update tasks" />
+    <MESSAGE value="add a row to database taskChangeRequestRepository when request a change task" />
+    <MESSAGE value="add type of token to payload of jwt" />
+    <MESSAGE value="add refresh token" />
+    <MESSAGE value="add JwtExceptionsHandler" />
+    <MESSAGE value="add mysql and sonar images docker" />
+    <MESSAGE value="add sonar plugin and properties" />
+    <MESSAGE value="add request change and assign task features" />
+    <MESSAGE value="ADD EVENTS SQL, AND Column to table user to double the change token in case of logics" />
+    <MESSAGE value="fix sonarLint errors in  Constants and change name of class to AppConstants" />
+    <MESSAGE value="add detached functionality" />
+    <option name="LAST_COMMIT_MESSAGE" value="add detached functionality" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
