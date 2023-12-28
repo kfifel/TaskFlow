@@ -28,6 +28,7 @@ public class TaskDtoMapper {
                 .id(task.getId())
                 .description(task.getDescription())
                 .deadline(task.getDeadline())
+                .assignedDate(task.getAssignedDate())
                 .completed(task.isCompleted())
                 .hasChanged(task.isHasChanged())
                 .tags(task.getTags().stream().map(TagDtoMapper::mapToDto).toList())

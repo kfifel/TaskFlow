@@ -27,7 +27,7 @@ spring:
   liquibase:
     enabled: false
   main:
-    lazy-initialization: true
+    lazy-initialization: false
 
 #logging:
   #file:

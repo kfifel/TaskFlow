@@ -7,7 +7,6 @@ import com.taskflow.service.TaskService;
 import com.taskflow.web.dto.TaskDTO;
 import com.taskflow.web.mapper.TaskDtoMapper;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +56,12 @@ public class TaskResource {
     @PostMapping("{id}/assign/{userId}")
     public ResponseEntity<Object> assignTask(@PathVariable("id") Long id, @PathVariable("userId")  Long userId) throws ResourceNotFoundException {
         taskService.assignTask(id, userId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("{id}/detach")
+    public ResponseEntity<Object> assignTask(@PathVariable("id") Long id, @RequestBody String comment) throws ResourceNotFoundException {
+        taskService.detach(id, comment);
         return ResponseEntity.ok().build();
     }
 }

@@ -18,4 +18,5 @@ public interface TaskService {
     User getTaskCreator(Long taskId) throws ResourceNotFoundException;
     void assignTask(Long taskId, Long userId) throws ResourceNotFoundException;
     void changeStatus(Long taskId, TaskStatus status) throws ResourceNotFoundException;
+    void detach(Long id, String comment) throws ResourceNotFoundException;
 }

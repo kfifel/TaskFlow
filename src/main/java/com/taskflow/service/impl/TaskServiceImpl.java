@@ -7,6 +7,8 @@ import com.taskflow.entity.enums.TokenType;
 import com.taskflow.exception.InsufficientTokensException;
 import com.taskflow.exception.ResourceNotFoundException;
 import com.taskflow.exception.UnauthorizedException;
+import com.taskflow.repository.TaskChangeRequestRepository;
+import com.taskflow.repository.TaskDetachedHistoryRepository;
 import com.taskflow.repository.TaskRepository;
 import com.taskflow.security.SecurityUtils;
 import com.taskflow.service.TagService;
@@ -17,11 +19,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static com.taskflow.utils.AppConstants.TASK_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
@@ -31,6 +35,7 @@ public class TaskServiceImpl implements TaskService {
     private final UserService userService;
     private final TagService tagService;
     private final TaskChangeRequestRepository taskChangeRequestRepository;
+    private final TaskDetachedHistoryRepository taskDetachedHistoryRepository;
 
     @Override
     @Transactional
@@ -53,7 +58,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     public Task findById(Long id) throws ResourceNotFoundException {
-        return taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("task", "Task not found"));
+        return taskRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("task", TASK_NOT_FOUND));
     }
 
     @Override
@@ -86,15 +91,15 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public User getTaskCreator(Long taskId) throws ResourceNotFoundException {
         return taskRepository.findById(taskId)
-                .orElseThrow(() -> new ResourceNotFoundException("task", "Task not found")).getCreatedBy();
+                .orElseThrow(() -> new ResourceNotFoundException("task", TASK_NOT_FOUND)).getCreatedBy();
     }
 
     @Override
     public void assignTask(Long taskId, Long userId) throws ResourceNotFoundException {
         Task task = findById(taskId);
         User user = userService.findById(userId);
-        task.setUser(user);
         canTaskBeAssigned(task);
+        task.setUser(user);
         task.setAssignedDate(LocalDateTime.now());
         taskRepository.save(task);
     }
@@ -106,6 +111,34 @@ public class TaskServiceImpl implements TaskService {
             throw new IllegalArgumentException("Task deadline is passed");
         task.setStatus(status);
         taskRepository.save(task);
+    }
+
+    @Override
+    @Transactional
+    public void detach(Long id, String comment) throws ResourceNotFoundException {
+        Task task = findById(id);
+        var principal = getAuthenticatedUser();
+        canTaskBeDetached(task, principal);
+        task.setUser(null);
+        principal.setHasDeleteToken(false);
+        task.setHasChanged(true);
+        taskDetachedHistoryRepository.save(TaskDetachedHistory.builder()
+                .comments(comment)
+                .task(task)
+                .detachedBy(principal)
+                .build());
+        taskRepository.save(task);
+    }
+
+    private void canTaskBeDetached(Task task, User principal) {
+        if (task.getUser() == null)
+            throw new IllegalArgumentException("This task is not assigned to anyone");
+
+        if (!principal.isHasDeleteToken())
+            throw new InsufficientTokensException("You have only one delete token per Month and you have already used it");
+
+        if(task.getStartDate().isBefore(LocalDateTime.now()))
+            throw new IllegalArgumentException("Task is already started");
     }
 
     private void canTaskBeAssigned(Task task) {

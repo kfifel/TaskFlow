@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -21,5 +22,8 @@ public class UserResponseDto {
     private String email;
     private LocalDateTime createdAt;
     private LocalDateTime verifiedAt;
+    private Integer numberOfChangeTokens;
+    private LocalDate toDoubleTokenChaneDate;
+    private boolean hasDeleteToken;
     private List<String> authorities;
 }
