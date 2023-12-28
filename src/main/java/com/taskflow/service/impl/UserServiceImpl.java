@@ -19,6 +19,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
+import static com.taskflow.utils.Constants.USER_NOT_FOUND;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -105,18 +107,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetailsService userDetailsService() {
         return username -> userRepository.findByEmail(username)
-                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                        .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND));
     }
 
     @Override
     public User findByUsername(String username) {
         return userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND));
     }
 
     @Override
     public User findById(Long userId) throws ResourceNotFoundException {
         return userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("userId", "User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("userId", USER_NOT_FOUND));
     }
 }

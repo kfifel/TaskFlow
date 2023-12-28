@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
@@ -29,6 +30,7 @@ public class User implements UserDetails {
     private String password;
     private LocalDateTime verifiedAt;
     private Integer numberOfChangeTokens;
+    private LocalDate toDoubleTokenChaneDate;
     private boolean hasDeleteToken;
 
     @ManyToMany(fetch = FetchType.EAGER)
