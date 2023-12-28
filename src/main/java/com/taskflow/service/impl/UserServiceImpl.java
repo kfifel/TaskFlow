@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
-import static com.taskflow.utils.Constants.USER_NOT_FOUND;
+import static com.taskflow.utils.AppConstants.USER_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
