@@ -30,7 +30,7 @@ public class User implements UserDetails {
     private String password;
     private LocalDateTime verifiedAt;
     private Integer numberOfChangeTokens;
-    private LocalDate toDoubleTokenChaneDate;
+    private LocalDate toDoubleTokenChangeDate;
     private boolean hasDeleteToken;
 
     @ManyToMany(fetch = FetchType.EAGER)

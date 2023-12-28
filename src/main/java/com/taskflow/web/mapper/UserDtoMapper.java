@@ -40,7 +40,7 @@ public class UserDtoMapper {
                 .createdAt(user.getCreatedAt())
                 .verifiedAt(user.getVerifiedAt())
                 .numberOfChangeTokens(user.getNumberOfChangeTokens())
-                .toDoubleTokenChaneDate(user.getToDoubleTokenChaneDate())
+                .toDoubleTokenChaneDate(user.getToDoubleTokenChangeDate())
                 .hasDeleteToken(user.isHasDeleteToken())
                 .authorities(user.getRoles().stream().map(Role::getName).toList())
                 .build();

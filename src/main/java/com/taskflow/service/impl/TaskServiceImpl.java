@@ -45,16 +45,13 @@ public class TaskServiceImpl implements TaskService {
         canTaskBeChanged(task, principal);
 
         principal.setNumberOfChangeTokens(principal.getNumberOfChangeTokens() - 1);
-        task.setHasChanged(true);
-        task.setUser(null);
         taskChangeRequestRepository.save(TaskChangeRequest.builder()
-                        .tokenType(TokenType.CHANGE_TOKEN)
-                        .dateRequest(LocalDateTime.now())
-                        .task(task)
-                        .status(StatusRequest.PENDING)
-                        .oldOwnerId(task.getUser().getId())
+                .tokenType(TokenType.CHANGE_TOKEN)
+                .dateRequest(LocalDateTime.now())
+                .task(task)
+                .status(StatusRequest.PENDING)
+                .oldOwnerId(task.getUser().getId())
                 .build());
-        taskRepository.save(task);
     }
 
     public Task findById(Long id) throws ResourceNotFoundException {
