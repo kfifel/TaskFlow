@@ -17,7 +17,7 @@ public interface UserService {
 
     void revokeRole(Long id, List<RoleDto> roles) throws ValidationException;
 
-    void assigneRole(Long id, List<RoleDto> roles) throws ValidationException;
+    User assigneRole(Long id, List<RoleDto> roles) throws ValidationException, ResourceNotFoundException;
 
     List<String> getAuthorities();
 

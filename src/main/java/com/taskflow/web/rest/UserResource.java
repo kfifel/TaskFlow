@@ -1,6 +1,7 @@
 package com.taskflow.web.rest;
 
 import com.taskflow.entity.User;
+import com.taskflow.exception.ResourceNotFoundException;
 import com.taskflow.web.dto.RoleDto;
 import com.taskflow.web.dto.request.UserRequestDto;
 import com.taskflow.web.dto.response.UserResponseDto;
@@ -34,17 +35,11 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<Response<UserResponseDto>> save(@RequestBody @Valid UserRequestDto userDto){
+    public ResponseEntity<Response<UserResponseDto>> save(@RequestBody @Valid UserRequestDto userDto) throws ValidationException {
         Response<UserResponseDto> response = new Response<>();
-        try {
-            User user = UserDtoMapper.toEntity(userDto);
-            response.setResult(UserDtoMapper.toDto(userService.save(user)));
-            response.setMessage("User has been saved successfully");
-        } catch (ValidationException e) {
-            response.setErrors(List.of(e.getCustomError()));
-            response.setMessage("User has not been saved");
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
+        User user = UserDtoMapper.toEntity(userDto);
+        response.setResult(UserDtoMapper.toDto(userService.save(user)));
+        response.setMessage("User has been saved successfully");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -54,31 +49,17 @@ public class UserResource {
     }
 
     @PostMapping("/revokeRole/{id}")
-    public ResponseEntity<Response<?>> revokeRole(@PathVariable("id") Long id, @RequestBody List<RoleDto> roles){
-        Response<?> response = new Response<>();
-        try {
-            userService.revokeRole(id, roles);
-            response.setMessage("Role has been revoked successfully");
-        } catch (ValidationException e) {
-            response.setErrors(List.of(e.getCustomError()));
-            response.setMessage("Role has not been revoked");
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity<Response<Object>> revokeRole(@PathVariable("id") Long id, @RequestBody List<RoleDto> roles) throws ValidationException {
+        Response<Object> response = new Response<>();
+        userService.revokeRole(id, roles);
+        response.setMessage("Role has been revoked successfully");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/assigneRole/{id}")
-    public ResponseEntity<Response<?>> assigneRole(@PathVariable("id") Long id, @RequestBody List<RoleDto> roles){
-        Response<?> response = new Response<>();
-        try {
-            userService.assigneRole(id, roles);
-            response.setMessage("Role has been assigned successfully");
-        } catch (ValidationException e) {
-            response.setErrors(List.of(e.getCustomError()));
-            response.setMessage("Role has not been assigned");
-            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+    public ResponseEntity<UserResponseDto> assigneRole(@PathVariable("id") Long id, @RequestBody List<RoleDto> roles) throws ValidationException, ResourceNotFoundException {
+        User user = userService.assigneRole(id, roles);
+        return new ResponseEntity<>(UserDtoMapper.toDto(user), HttpStatus.OK);
     }
 
 }
