@@ -14,7 +14,10 @@ import com.taskflow.security.SecurityUtils;
 import com.taskflow.service.TagService;
 import com.taskflow.service.TaskService;
 import com.taskflow.service.UserService;
+import com.taskflow.web.dto.TaskDTO;
+import com.taskflow.web.dto.UserTaskDto;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -23,7 +26,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.taskflow.utils.AppConstants.TASK_NOT_FOUND;
 
@@ -36,6 +41,7 @@ public class TaskServiceImpl implements TaskService {
     private final TagService tagService;
     private final TaskChangeRequestRepository taskChangeRequestRepository;
     private final TaskDetachedHistoryRepository taskDetachedHistoryRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     @Transactional
@@ -125,6 +131,24 @@ public class TaskServiceImpl implements TaskService {
                 .detachedBy(principal)
                 .build());
         taskRepository.save(task);
+    }
+
+    @Override
+    public List<UserTaskDto> getOverviewOfAssignedTasks(LocalDate filterStartDate, LocalDate filterEndDate) {
+        LocalDateTime startOfDay = filterStartDate.atStartOfDay();
+        LocalDateTime endOfDay = filterEndDate.atStartOfDay();
+        List<TaskDTO> list = taskRepository.findByStartDateBetween(startOfDay, endOfDay)
+                .stream()
+                .map(element -> modelMapper
+                        .map(element, TaskDTO.class))
+                .toList();
+        List<User> userDto = userService.findAll();
+        List<UserTaskDto> userTaskDto = new ArrayList<>();
+        userTaskDto.add(UserTaskDto.builder()
+                .task(list)
+                .build());
+
+        return userTaskDto;
     }
 
     private void canTaskBeDetached(Task task, User principal) {

@@ -24,7 +24,6 @@ public class UserResource {
 
     private final UserServiceImpl userService;
 
-
     @GetMapping
     public ResponseEntity<Response<List<UserResponseDto>>> findAll(){
         Response<List<UserResponseDto>> response = new Response<>();
@@ -46,6 +45,11 @@ public class UserResource {
     @GetMapping("/authorities")
     public ResponseEntity<List<String>> getAuthorities() {
         return ResponseEntity.ok().body(userService.getAuthorities());
+    }
+
+    @GetMapping("/myAuthorities")
+    public ResponseEntity<List<String>> getMyAuthorities() {
+        return ResponseEntity.ok().body(userService.getMyAuthorities());
     }
 
     @PostMapping("/revokeRole/{id}")

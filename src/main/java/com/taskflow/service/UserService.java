@@ -26,4 +26,6 @@ public interface UserService {
     User findByUsername(String username);
 
     User findById(Long userId) throws ResourceNotFoundException;
+
+    List<String> getMyAuthorities();
 }

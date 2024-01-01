@@ -5,12 +5,14 @@ import com.taskflow.entity.User;
 import com.taskflow.exception.ResourceNotFoundException;
 import com.taskflow.repository.RoleRepository;
 import com.taskflow.repository.UserRepository;
+import com.taskflow.security.SecurityUtils;
 import com.taskflow.service.RoleService;
 import com.taskflow.service.UserService;
 import com.taskflow.utils.CustomError;
 import com.taskflow.utils.ValidationException;
 import com.taskflow.web.dto.RoleDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -133,5 +135,13 @@ public class UserServiceImpl implements UserService {
     public User findById(Long userId) throws ResourceNotFoundException {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("userId", USER_NOT_FOUND));
+    }
+
+    @Override
+    public List<String> getMyAuthorities() {
+        return SecurityUtils.getUserDetails()
+                .getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .toList();
     }
 }
