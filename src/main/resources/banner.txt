@@ -1,22 +1,22 @@
 
-${AnsiColor.BRIGHT_BLUE}█████████████████████████████████████████████████████████████████████████████████████
-${AnsiColor.BRIGHT_BLUE}█████████████████████████████████████████████████████████████████████████████████████
-${AnsiColor.BRIGHT_BLUE}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.RED}█████${AnsiColor.BRIGHT_BLUE}█████████████████
-${AnsiColor.BRIGHT_BLUE}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.RED}█████${AnsiColor.BRIGHT_BLUE}█████████████████
-${AnsiColor.BRIGHT_BLUE}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.RED}█████${AnsiColor.BRIGHT_BLUE}█████████████████
-${AnsiColor.BRIGHT_BLUE}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.RED}█████${AnsiColor.BRIGHT_BLUE}█████████████████
-${AnsiColor.GREEN}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}██████████████████${AnsiColor.RED}█████${AnsiColor.GREEN}█████████████████
-${AnsiColor.GREEN}█████████████████${AnsiColor.BRIGHT_RED}███████████████████████████████████████████████████${AnsiColor.GREEN}█████████████████
-${AnsiColor.GREEN}████████████████████████████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}████████████████████████████████████████
-${AnsiColor.GREEN}████████████████████████████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}████████████████████████████████████████
-${AnsiColor.GREEN}████████████████████████████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}████████████████████████████████████████
-${AnsiColor.GREEN}████████████████████████████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}████████████████████████████████████████
-${AnsiColor.GREEN}█████████████████${AnsiColor.BRIGHT_RED}███████████████████████████████████████████████████${AnsiColor.GREEN}█████████████████
-${AnsiColor.GREEN}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}██████████████████${AnsiColor.RED}█████${AnsiColor.GREEN}█████████████████
-${AnsiColor.YELLOW}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.RED}█████${AnsiColor.YELLOW}█████████████████
-${AnsiColor.YELLOW}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.RED}█████${AnsiColor.YELLOW}█████████████████
-${AnsiColor.YELLOW}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.RED}█████${AnsiColor.YELLOW}█████████████████
-${AnsiColor.YELLOW}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.RED}█████${AnsiColor.YELLOW}█████████████████
-${AnsiColor.YELLOW}█████████████████████████████████████████████████████████████████████████████████████
-${AnsiColor.YELLOW}█████████████████████████████████████████████████████████████████████████████████████
-${AnsiColor.BRIGHT_BLUE}:: Meow :: Running Spring Boot ${spring-boot.version} :: \ö/
+                        ${AnsiColor.BRIGHT_BLUE}█████████████████████████████████████████████████████████████████████████████████████
+                        ${AnsiColor.BRIGHT_BLUE}█████████████████████████████████████████████████████████████████████████████████████
+                        ${AnsiColor.BRIGHT_BLUE}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.RED}█████${AnsiColor.BRIGHT_BLUE}█████████████████
+                        ${AnsiColor.BRIGHT_BLUE}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.RED}█████${AnsiColor.BRIGHT_BLUE}█████████████████
+                        ${AnsiColor.BRIGHT_BLUE}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.RED}█████${AnsiColor.BRIGHT_BLUE}█████████████████
+                        ${AnsiColor.BRIGHT_BLUE}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.BRIGHT_BLUE}██████████████████${AnsiColor.RED}█████${AnsiColor.BRIGHT_BLUE}█████████████████
+                        ${AnsiColor.GREEN}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}██████████████████${AnsiColor.RED}█████${AnsiColor.GREEN}█████████████████
+                        ${AnsiColor.GREEN}█████████████████${AnsiColor.BRIGHT_RED}███████████████████████████████████████████████████${AnsiColor.GREEN}█████████████████
+                        ${AnsiColor.GREEN}████████████████████████████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}████████████████████████████████████████
+                        ${AnsiColor.GREEN}████████████████████████████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}████████████████████████████████████████
+                        ${AnsiColor.GREEN}████████████████████████████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}████████████████████████████████████████
+                        ${AnsiColor.GREEN}████████████████████████████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}████████████████████████████████████████
+                        ${AnsiColor.GREEN}█████████████████${AnsiColor.BRIGHT_RED}███████████████████████████████████████████████████${AnsiColor.GREEN}█████████████████
+                        ${AnsiColor.GREEN}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.GREEN}██████████████████${AnsiColor.RED}█████${AnsiColor.GREEN}█████████████████
+                        ${AnsiColor.YELLOW}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.RED}█████${AnsiColor.YELLOW}█████████████████
+                        ${AnsiColor.YELLOW}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.RED}█████${AnsiColor.YELLOW}█████████████████
+                        ${AnsiColor.YELLOW}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.RED}█████${AnsiColor.YELLOW}█████████████████
+                        ${AnsiColor.YELLOW}█████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.BRIGHT_RED}█████${AnsiColor.YELLOW}██████████████████${AnsiColor.RED}█████${AnsiColor.YELLOW}█████████████████
+                        ${AnsiColor.YELLOW}█████████████████████████████████████████████████████████████████████████████████████
+                        ${AnsiColor.YELLOW}█████████████████████████████████████████████████████████████████████████████████████
+                        ${AnsiColor.BRIGHT_BLUE}:: Meow :: Running Spring Boot ${spring-boot.version} :: \ö/
