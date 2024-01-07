@@ -15,7 +15,7 @@ public class UserTaskDto {
     private String id;
     private String fullName;
     private String email;
-    private List<TaskDTO> task;
+    private List<TaskDTO> tasks;
     private Integer usedTokenCount;
     private Integer percentageCompleted;
     private LocalDate filterStartDate;

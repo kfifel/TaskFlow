@@ -14,8 +14,8 @@ import com.taskflow.security.SecurityUtils;
 import com.taskflow.service.TagService;
 import com.taskflow.service.TaskService;
 import com.taskflow.service.UserService;
-import com.taskflow.web.dto.TaskDTO;
 import com.taskflow.web.dto.UserTaskDto;
+import com.taskflow.web.mapper.TaskDtoMapper;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -28,12 +28,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import static com.taskflow.utils.AppConstants.TASK_NOT_FOUND;
 
 @Service
 @RequiredArgsConstructor
+
 public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
@@ -135,20 +138,36 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<UserTaskDto> getOverviewOfAssignedTasks(LocalDate filterStartDate, LocalDate filterEndDate) {
+        if(filterStartDate == null || filterEndDate == null)
+            throw new IllegalArgumentException("Filter dates are required");
         LocalDateTime startOfDay = filterStartDate.atStartOfDay();
         LocalDateTime endOfDay = filterEndDate.atStartOfDay();
-        List<TaskDTO> list = taskRepository.findByStartDateBetween(startOfDay, endOfDay)
-                .stream()
-                .map(element -> modelMapper
-                        .map(element, TaskDTO.class))
-                .toList();
-        List<User> userDto = userService.findAll();
+        List<Task> taskList = taskRepository.findByStartDateBetweenAndUserNotNull(startOfDay, endOfDay);
+        Set<User> userDto = taskList.stream().map(Task::getUser).collect(Collectors.toSet());
         List<UserTaskDto> userTaskDto = new ArrayList<>();
-        userTaskDto.add(UserTaskDto.builder()
-                .task(list)
+        userDto.forEach(user -> {
+            var myTasks = taskList.stream().filter(task -> task.getUser().equals(user)).toList();
+            userTaskDto.add(UserTaskDto.builder()
+                    .fullName(user.getFirstName() + " " + user.getLastName())
+                    .email(user.getEmail())
+                    .tasks(myTasks.stream().map(TaskDtoMapper::mapToDto).toList())
+                    .percentageCompleted(calculatePercentageCompleted(myTasks))
+                    .filterEndDate(filterEndDate)
+                    .filterStartDate(filterStartDate)
                 .build());
-
+        });
         return userTaskDto;
+    }
+
+    private Integer calculatePercentageCompleted(List<Task> list) {
+        AtomicInteger percentage = new AtomicInteger();
+        AtomicInteger countTask = new AtomicInteger();
+        list.forEach(task -> {
+                countTask.getAndIncrement();
+                if(task.getStatus() == TaskStatus.DONE)
+                    percentage.getAndIncrement();
+            });
+        return (percentage.get() / countTask.get()) * 100;
     }
 
     private void canTaskBeDetached(Task task, User principal) {
@@ -173,7 +192,7 @@ public class TaskServiceImpl implements TaskService {
 
     private void canTakeBeCreated(Task task) {
         if (task.getStartDate() != null) {
-            if (task.getDeadline().toLocalDate().isAfter(LocalDate.now().plusDays(3)))
+            if (task.getDeadline().toLocalDate().isBefore(LocalDate.now().plusDays(3)))
                 throw new IllegalArgumentException("Task scheduling is restricted to 3 days in advance.");
             if (task.getStartDate().isBefore(LocalDateTime.now()))
                 throw new IllegalArgumentException("The date is in the past !");

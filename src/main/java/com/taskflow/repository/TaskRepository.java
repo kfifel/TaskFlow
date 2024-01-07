@@ -9,6 +9,5 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Long> {
-    List<Task> findByStartDateBetween(LocalDateTime filterStartDate, LocalDateTime filterEndDate);
-
+    List<Task> findByStartDateBetweenAndUserNotNull(LocalDateTime filterStartDate, LocalDateTime filterEndDate);
 }

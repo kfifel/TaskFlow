@@ -11,8 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Mono;
@@ -42,7 +42,6 @@ public class TaskResource {
     }
 
     @PostMapping("{id}/request-change")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or (hasRole('ROLE_USER') and @securityUtils.getCurrentUserLogin() == @taskService.getTaskCreator(#id).getUsername())")
     public ResponseEntity<Object> requestChangeTask(@PathVariable("id") Long id) throws ResourceNotFoundException {
         taskService.requestChangeTask(id);
 
@@ -50,7 +49,6 @@ public class TaskResource {
     }
 
     @PostMapping("{id}/change-status/{status}")
-    @PreAuthorize("hasRole('ROLE_ADMIN') or (hasRole('ROLE_USER') and @securityUtils.getCurrentUserLogin() == @taskService.getTaskCreator(#id).getUsername())")
     public ResponseEntity<Object> changeStatus(@PathVariable("id") Long id, @PathVariable("status") TaskStatus status) throws ResourceNotFoundException {
         taskService.changeStatus(id, status);
         return ResponseEntity.ok().build();
@@ -69,9 +67,10 @@ public class TaskResource {
     }
 
     @GetMapping("overview")
+//    @PreAuthorize("hasRole('ROLE_MANAGER')")
     public ResponseEntity<List<UserTaskDto>> getOverviewOfAssignedTasks(
-            @Param("filterStartDate") LocalDate filterStartDate,
-            @Param("filterStartDate") LocalDate filterEndDate
+            @Param("filterStartDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate filterStartDate,
+            @Param("filterStartDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate filterEndDate
             ) {
         List<UserTaskDto> userTaskDto = taskService.getOverviewOfAssignedTasks(filterStartDate, filterEndDate);
         return ResponseEntity.ok().body(userTaskDto);

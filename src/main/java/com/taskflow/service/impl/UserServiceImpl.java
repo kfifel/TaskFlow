@@ -12,6 +12,7 @@ import com.taskflow.utils.CustomError;
 import com.taskflow.utils.ValidationException;
 import com.taskflow.web.dto.RoleDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -139,9 +140,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<String> getMyAuthorities() {
-        return SecurityUtils.getUserDetails()
+        return getCurrentUser()
                 .getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
     }
+
+    @Override
+    public User getCurrentUser() {
+        String currentUserLogin = SecurityUtils.getCurrentUserLogin();
+        if(currentUserLogin == null)
+            throw new BadCredentialsException(USER_NOT_FOUND);
+        return this.findByUsername(currentUserLogin);
+    }
+
 }

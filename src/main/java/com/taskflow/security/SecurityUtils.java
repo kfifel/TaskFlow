@@ -16,11 +16,7 @@ import java.util.Arrays;
 @Component
 public final class SecurityUtils {
 
-    private static UserDetailsService userDetailsService;
-
-    @Autowired
-    private SecurityUtils(UserService userService) {
-        SecurityUtils.userDetailsService = userService.userDetailsService();
+    private SecurityUtils() {
     }
 
     /**
@@ -106,10 +102,5 @@ public final class SecurityUtils {
      */
     public static boolean hasCurrentUserThisAuthority(String authority) {
         return hasCurrentUserAnyOfAuthorities(authority);
-    }
-
-    public static UserDetails getUserDetails() {
-        String currentUserLogin = SecurityUtils.getCurrentUserLogin();
-        return userDetailsService.loadUserByUsername(currentUserLogin);
     }
 }
