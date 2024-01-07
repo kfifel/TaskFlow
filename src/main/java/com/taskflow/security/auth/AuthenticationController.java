@@ -1,25 +1,25 @@
 package com.taskflow.security.auth;
 
+import com.taskflow.entity.User;
 import com.taskflow.exception.UnauthorizedException;
 import com.taskflow.security.AuthenticationService;
 import com.taskflow.utils.ValidationException;
 import com.taskflow.web.dto.request.SignInRequest;
 import com.taskflow.web.dto.request.SignUpRequest;
+import com.taskflow.web.dto.response.UserResponseDto;
+import com.taskflow.web.mapper.UserDtoMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
+
     private final AuthenticationService authenticationService;
 
     @PostMapping("/login")
@@ -34,6 +34,12 @@ public class AuthenticationController {
         JwtAuthenticationResponse result = authenticationService.signup(register);
 
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserResponseDto> me() {
+        User result = authenticationService.me();
+        return ResponseEntity.ok(UserDtoMapper.toDto(result));
     }
 
     @PostMapping("/token/refresh")

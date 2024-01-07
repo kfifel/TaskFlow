@@ -8,6 +8,7 @@ import com.taskflow.utils.Response;
 import com.taskflow.utils.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -73,7 +74,7 @@ public class AppExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler({UnauthorizedException.class, InsufficientTokensException.class})
+    @ExceptionHandler({UnauthorizedException.class, InsufficientTokensException.class, BadCredentialsException.class})
     public ResponseEntity<Response<Object>> handleUnauthorizedException(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Response.builder()
                 .message(ex.getMessage())

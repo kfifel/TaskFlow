@@ -61,9 +61,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public JwtAuthenticationResponse signin(SignInRequest request) {
         authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+            new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
         );
-        var user = userRepository.findByEmail(request.getUsername())
+        var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
         var accessToken = jwtService.generateToken(user, TokenType.ACCESS_TOKEN);
         var refreshToken = jwtService.generateToken(user, TokenType.REFRESH_TOKEN);
@@ -85,5 +85,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     .build();
         }
         throw new UnauthorizedException("Refresh token is invalid");
+    }
+
+    @Override
+    public User me() {
+        return userService.getCurrentUser();
     }
 }
