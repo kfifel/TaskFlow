@@ -39,7 +39,7 @@ public class UserResource {
         User user = UserDtoMapper.toEntity(userDto);
         response.setResult(UserDtoMapper.toDto(userService.save(user)));
         response.setMessage("User has been saved successfully");
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @GetMapping("/authorities")

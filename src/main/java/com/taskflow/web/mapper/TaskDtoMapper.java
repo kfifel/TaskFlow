@@ -26,6 +26,7 @@ public class TaskDtoMapper {
         String createdBy = task.getCreatedBy().getFirstName() + " " + task.getCreatedBy().getLastName();
         return TaskDTO.builder()
                 .id(task.getId())
+                .title(task.getTitle())
                 .description(task.getDescription())
                 .deadline(task.getDeadline())
                 .assignedDate(task.getAssignedDate())

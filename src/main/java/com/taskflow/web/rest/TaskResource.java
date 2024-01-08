@@ -12,7 +12,9 @@ import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Pageable;
 import reactor.core.publisher.Mono;
@@ -29,9 +31,11 @@ public class TaskResource {
     private final TaskService taskService;
 
     @PostMapping
-    public ResponseEntity<Mono<Task>> createTask(@RequestBody @Valid TaskDTO task) throws ResourceNotFoundException {
+    public ResponseEntity<Task> createTask(@RequestBody @Valid TaskDTO task) throws ResourceNotFoundException {
         Task save = taskService.save(TaskDtoMapper.mapToEntity(task));
-        return ResponseEntity.ok(Mono.just(save));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(save);
     }
 
     @GetMapping

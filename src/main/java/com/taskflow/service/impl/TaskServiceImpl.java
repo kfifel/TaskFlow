@@ -203,7 +203,7 @@ public class TaskServiceImpl implements TaskService {
         if (task.getTags() == null || task.getTags().size() < 2) {
             throw new IllegalArgumentException("At least 2 tags is required !");
         }
-        List<Tag> tags = tagService.findByNameIn(task.getTags().stream().map(Tag::getName).toList());
+        List<Tag> tags = tagService.findByNameInOrSave(task.getTags().stream().map(Tag::getName).toList());
         task.setTags(tags);
     }
 
