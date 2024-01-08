@@ -39,6 +39,9 @@ public class UserDtoMapper {
                 .email(user.getEmail())
                 .createdAt(user.getCreatedAt())
                 .verifiedAt(user.getVerifiedAt())
+                .numberOfChangeTokens(user.getNumberOfChangeTokens())
+                .toDoubleTokenChaneDate(user.getToDoubleTokenChangeDate())
+                .hasDeleteToken(user.isHasDeleteToken())
                 .authorities(user.getRoles().stream().map(Role::getName).toList())
                 .build();
     }

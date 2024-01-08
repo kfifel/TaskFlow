@@ -6,9 +6,9 @@ import com.taskflow.exception.UnauthorizedException;
 import com.taskflow.utils.CustomError;
 import com.taskflow.utils.Response;
 import com.taskflow.utils.ValidationException;
-import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -26,8 +26,8 @@ public class AppExceptionHandler {
         Response<Object> response = new Response<>();
         List<CustomError> errorList = new ArrayList<>();
         response.setMessage("Validation error");
-        ex.getBindingResult().getAllErrors().forEach(error -> {
-            String fieldName = error.getObjectName();
+        ex.getBindingResult().getFieldErrors().forEach(error -> {
+            String fieldName = error.getField();
             String errorMessage = error.getDefaultMessage();
             errorList.add(new CustomError(fieldName, errorMessage));
         });
@@ -74,7 +74,7 @@ public class AppExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    @ExceptionHandler({UnauthorizedException.class, InsufficientTokensException.class})
+    @ExceptionHandler({UnauthorizedException.class, InsufficientTokensException.class, BadCredentialsException.class})
     public ResponseEntity<Response<Object>> handleUnauthorizedException(RuntimeException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Response.builder()
                 .message(ex.getMessage())

@@ -3,7 +3,9 @@ package com.taskflow.entity;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.taskflow.entity.enums.TaskStatus;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.Entity;
 import java.io.Serial;
@@ -29,11 +31,19 @@ public class Task implements Serializable {
 
     private String description;
 
-    private LocalDateTime expDate;
+    private LocalDateTime deadline;
 
-    private boolean completed;
+    private LocalDateTime startDate;
 
     private LocalDateTime assignedDate;
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatus status;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    private boolean completed;
 
     private boolean hasChanged;
 

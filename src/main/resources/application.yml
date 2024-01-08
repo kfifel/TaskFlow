@@ -21,19 +21,19 @@ spring:
   jpa:
     show-sql: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     generate-ddl: true
 
   liquibase:
     enabled: false
   main:
-    lazy-initialization: true
+    lazy-initialization: false
 
 #logging:
-  #file:
-    #name: myLogs.log
+#  file:
+#    name: myLogs.log
 #  level:
-#    root: info
+#    root: debug
 
 token:
   signing:
@@ -41,7 +41,7 @@ token:
   validity:
     access:
       in:
-        minutes: 20
+        minutes: 1400
     refresh:
       in:
-        month: 6
+        month: 1

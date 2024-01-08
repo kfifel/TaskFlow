@@ -1,5 +1,6 @@
 package com.taskflow.security;
 
+import com.taskflow.entity.User;
 import com.taskflow.security.auth.JwtAuthenticationResponse;
 import com.taskflow.utils.ValidationException;
 import com.taskflow.web.dto.request.SignInRequest;
@@ -12,4 +13,6 @@ public interface AuthenticationService {
     JwtAuthenticationResponse signin(SignInRequest request);
 
     JwtAuthenticationResponse refreshToken(String refreshToken) throws ValidationException;
+
+    User me();
 }

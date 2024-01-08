@@ -17,7 +17,7 @@ public class TagServiceImpl implements TagService {
     private final TagRepository tagRepository;
 
     @Override
-    public List<Tag> findByNameIn(List<String> names) {
+    public List<Tag> findByNameInOrSave(List<String> names) {
         List<String> tags = new ArrayList<>(names);
         List<Tag> existingTags = tagRepository.findByNameIn(names);
         if (existingTags.size() == tags.size()) {

@@ -45,8 +45,6 @@ public class JWTFilter extends OncePerRequestFilter {
             return;
         }
         try {
-
-
             jwt = authHeader.substring(7);
             userEmail = jwtService.extractUserName(jwt);
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -66,6 +64,11 @@ public class JWTFilter extends OncePerRequestFilter {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             log.error("Unauthorized error: {}", e.getMessage());
             response.getWriter().write(new CustomError("token", "Token expired").toString());
+            response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        }catch (Exception e) {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            log.error("Unauthorized error: {}", e.getMessage(), e);
+            response.getWriter().write(new CustomError("error", "Error has been occurred").toString());
             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         }
     }
